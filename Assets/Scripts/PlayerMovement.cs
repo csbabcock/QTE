@@ -29,11 +29,15 @@ public class PlayerMovement : MonoBehaviour {
     //Input
     float x, y;
 
-    public GameObject QTETrigger;
+    public GameObject TransportTrigger;
+    public GameObject FarmingTrigger;
+    public GameObject PowerTrigger;
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
-        QTETrigger.GetComponent<QTEsys>().enabled = false;
+        TransportTrigger.GetComponent<QTEsys>().enabled = false;
+        FarmingTrigger.GetComponent<QTEsys>().enabled = false;
+        PowerTrigger.GetComponent<QTEsys>().enabled = false;
     }
     
     void Start() {
@@ -146,12 +150,16 @@ public class PlayerMovement : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        QTETrigger.GetComponent<QTEsys>().enabled = true;
+        TransportTrigger.GetComponent<QTEsys>().enabled = true;
+        FarmingTrigger.GetComponent<QTEsys>().enabled = true;
+        PowerTrigger.GetComponent<QTEsys>().enabled = true;
     }
     
     private void OnTriggerExit(Collider other)
     {
-        QTETrigger.GetComponent<QTEsys>().enabled = false;
+        TransportTrigger.GetComponent<QTEsys>().enabled = false;
+        FarmingTrigger.GetComponent<QTEsys>().enabled = false;
+        PowerTrigger.GetComponent<QTEsys>().enabled = false;
     }
 
   

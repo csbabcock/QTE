@@ -5,16 +5,36 @@ using UnityEngine.UI;
 
 public class QTEsys : MonoBehaviour
 {
+    PlayerMovement playerMovement;
+
     public GameObject DisplayBox;
     public GameObject PassBox;
+    public GameObject WinGameUI;
+    public GameObject LoseGameUI;
+
+    bool gameHasEnded = false;
+
+    
+
+    
+ 
 
     public int QTEGen; 
     public int WaitingForKey;
     public int CorrectKey;
     public int CountingDown;
+    public int winScore;
+    public int loseScore;
+
+    private void Awake()
+    {
+        WinGameUI.SetActive(false);
+        LoseGameUI.SetActive(false);
+    }
 
     private void Update()
     {
+
         if(WaitingForKey == 0)
         {
             QTEGen = Random.Range(1, 4);
@@ -94,7 +114,16 @@ public class QTEsys : MonoBehaviour
             }
         }
 
+        if(winScore == 3)
+        {
+            WinGame();
+        }
+        if(loseScore == 3)
+        {
+            LoseGame();
+        }
 
+        
     }
 
     IEnumerator KeyPressing()
@@ -112,6 +141,8 @@ public class QTEsys : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             WaitingForKey = 0;
             CountingDown = 1;
+            winScore += 1;
+        
         }
 
         if(CorrectKey == 2)
@@ -125,6 +156,8 @@ public class QTEsys : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             WaitingForKey = 0;
             CountingDown = 1;
+            loseScore += 1;
+     
         }
     }
 
@@ -143,7 +176,17 @@ public class QTEsys : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             WaitingForKey = 0;
             CountingDown = 1;
+            loseScore += 1;
         }
+    }
+
+    public void WinGame()
+    {
+        WinGameUI.SetActive(true);
+    }
+    public void LoseGame()
+    {
+        LoseGameUI.SetActive(true);
     }
 
 }
