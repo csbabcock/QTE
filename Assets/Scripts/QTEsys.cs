@@ -13,7 +13,7 @@ public class QTEsys : MonoBehaviour
     public GameObject WinGameUI;
     public GameObject LoseGameUI;
 
-    bool gameHasEnded = false;
+    
 
     public int QTEGen; 
     public int WaitingForKey;
@@ -190,7 +190,7 @@ public class QTEsys : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
 }
