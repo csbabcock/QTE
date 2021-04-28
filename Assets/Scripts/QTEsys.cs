@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QTEsys : MonoBehaviour
 {
@@ -13,11 +14,6 @@ public class QTEsys : MonoBehaviour
     public GameObject LoseGameUI;
 
     bool gameHasEnded = false;
-
-    
-
-    
- 
 
     public int QTEGen; 
     public int WaitingForKey;
@@ -166,7 +162,7 @@ public class QTEsys : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
         if(CountingDown == 1)
         {
-            QTEGen =4;
+            QTEGen = 4;
             CountingDown = 2;
             PassBox.GetComponent<Text>().text = "FAIL!";
             yield return new WaitForSeconds(1.5f);
@@ -183,10 +179,18 @@ public class QTEsys : MonoBehaviour
     public void WinGame()
     {
         WinGameUI.SetActive(true);
+        LoadMainMenu();
     }
+
     public void LoseGame()
     {
         LoseGameUI.SetActive(true);
+        LoadMainMenu();
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
