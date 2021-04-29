@@ -22,6 +22,8 @@ public class QTEsys : MonoBehaviour
     public int winScore;
     public int loseScore;
 
+    public float restartDelay = 3f;
+
     private void Awake()
     {
         WinGameUI.SetActive(false);
@@ -30,6 +32,16 @@ public class QTEsys : MonoBehaviour
 
     private void Update()
     {
+
+        if(winScore == 3)
+        {
+            WinGame();
+        }
+
+        if(loseScore == 3)
+        {
+            LoseGame();
+        }
 
         if(WaitingForKey == 0)
         {
@@ -110,14 +122,7 @@ public class QTEsys : MonoBehaviour
             }
         }
 
-        if(winScore == 3)
-        {
-            WinGame();
-        }
-        if(loseScore == 3)
-        {
-            LoseGame();
-        }
+        
 
         
     }
@@ -128,6 +133,7 @@ public class QTEsys : MonoBehaviour
 
         if(CorrectKey == 1)
         {
+            winScore += 1;
             CountingDown = 2;
             PassBox.GetComponent<Text>().text = "PASS!";
             yield return new WaitForSeconds(1.5f);
@@ -137,12 +143,13 @@ public class QTEsys : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             WaitingForKey = 0;
             CountingDown = 1;
-            winScore += 1;
+           
         
         }
 
         if(CorrectKey == 2)
         {
+            loseScore += 1;
             CountingDown = 2;
             PassBox.GetComponent<Text>().text = "FAIL!";
             yield return new WaitForSeconds(1.5f);
@@ -152,7 +159,7 @@ public class QTEsys : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             WaitingForKey = 0;
             CountingDown = 1;
-            loseScore += 1;
+           
      
         }
     }
@@ -162,6 +169,7 @@ public class QTEsys : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
         if(CountingDown == 1)
         {
+            loseScore += 1;
             QTEGen = 4;
             CountingDown = 2;
             PassBox.GetComponent<Text>().text = "FAIL!";
@@ -172,25 +180,26 @@ public class QTEsys : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             WaitingForKey = 0;
             CountingDown = 1;
-            loseScore += 1;
+            
         }
     }
 
     public void WinGame()
     {
         WinGameUI.SetActive(true);
-        LoadMainMenu();
+        Invoke("Restart", restartDelay);
+    
     }
 
     public void LoseGame()
     {
         LoseGameUI.SetActive(true);
-        LoadMainMenu();
+        Invoke("Restart", restartDelay);
     }
 
-    public void LoadMainMenu()
+    public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }

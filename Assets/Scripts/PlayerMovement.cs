@@ -53,6 +53,11 @@ public class PlayerMovement : MonoBehaviour {
     private void Update() {
         MyInput();
         Look();
+
+        if(Input.GetKeyDown(KeyCode.Escape) == true)
+     {
+        Application.Quit();
+     }
     }
 
     /// <summary>
